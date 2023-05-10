@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import datetime
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -24,6 +25,32 @@ def show_tracker(request):
     }
     
     return render(request, "tracker.html", context)
+
+
+
+@csrf_exempt
+def create_transaction_ajax(request):  
+# create object of form
+    form = TransactionRecordForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        data = TransactionRecord.objects.last()
+
+    # parsing the form data into json
+    result = {
+        'id':data.id,
+        'name':data.name,
+        'type':data.type,
+        'amount':data.amount,
+        'date':data.date,
+        'description':data.description,
+    }
+    return JsonResponse(result)
+
+    context = {'form': form}
+    return render(request, "create_transaction.html", context)
+
 
 def register(request):
     form = UserCreationForm()

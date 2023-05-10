@@ -1,22 +1,80 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %}
 
+{% load static %}
+
+{% block content %}
+
+<style>
+  body {
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+      color: #444;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+  }
+  h1 {
+      text-align: center;
+      margin-top: 50px;
+  }
+  form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
+      border-radius: 10px;
+  }
+  table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+  }
+  th, td {
+      padding: 10px;
+      text-align: left;
+  }
+  th {
+      width: 150px;
+      font-weight: normal;
+  }
+  input[type="text"],
+  select,
+  input[type="date"],
+  textarea,
+  input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: #ADD8E6;
+      font-size: 16px;
+      margin-bottom: 10px;
+  }
+  input[type="submit"] {
+      background-color: #0000ff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+  }
+  input[type="submit"]:hover {
+      background-color: #006CBA;
+  }
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container-fluid">
-    <nav class="navbar bg-light">
-      <div class="container">
-        <a href="#">
-          <img
-            src="https://blog.ipleaders.in/wp-content/uploads/2021/06/money-vector-id1181433079-1.jpg"
-            alt="Bootstrap"
-            width="60"
-            height="48"
-          />
-        </a>
-      </div>
-    </nav>
-  </div>
+    <div class="container-fluid">
+        <nav class="navbar bg-light">
+            <div class="container">
+              <a href="#">
+                <img src="https://blog.ipleaders.in/wp-content/uploads/2021/06/money-vector-id1181433079-1.jpg" alt="Bootstrap" width="60" height="48">
+              </a>
+            </div>
+        </nav>
+    </div>
 </nav>
-
 <div class="container">
   <div class="row">
     <div class="col-md-6 mx-auto mt-5">
@@ -40,15 +98,13 @@
               {{ form.amount }}
             </div>
             <div class="form-group">
-              <label for="{{ form.description.id_for_label }}"
-                >Deskripsi:</label
-              >
+              <label for="{{ form.description.id_for_label }}">Deskripsi:</label>
               {{ form.description }}
             </div>
             <div class="form-group">
-              <div class="text-center">
-                <button type="submit" class="btn btn-primary">Ubah</button>
-              </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Ubah</button>
+                </div>                
             </div>
           </form>
         </div>
