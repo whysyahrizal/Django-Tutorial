@@ -20,14 +20,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p739k6j9#%6(@1jixjxx$(jv53v&okrj@sqh8jh(ulcb$8&#9_'
+SECRET_KEY = 'django-insecure-sh535))ljcep)42pdypj!)7=&g^rfp8o)#f+icn%vg2hmttp-('
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = [f'https://pbp.up.railway.app']
-
+ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = [f'https://money-tracker.up.railway.app']
 
 # Application definition
 
@@ -40,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'money_tracker',
 ]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
