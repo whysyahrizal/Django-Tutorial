@@ -1,10 +1,77 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h5>Nama: </h5>
-<b>{{name}}</b>
 
-<table>
+<style>
+    .styled-table {
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        font-family: sans-serif;
+        min-width: 400px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .styled-table thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+    }
+
+    .styled-table th,
+    .styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+.center{
+    margin-left : 10px;
+    margin-right : 10px;
+}
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <nav class="navbar bg-light">
+            <div class="container">
+              <a href="#">
+                <img src="https://blog.ipleaders.in/wp-content/uploads/2021/06/money-vector-id1181433079-1.jpg" alt="Bootstrap" width="60" height="48">
+              </a>
+            </div>
+          </nav>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        </ul>
+          <a class="btn navbar-light btn-light logout" href="{% url 'money_tracker:logout' %}">Logout</a>
+
+      </div>
+    </div>
+  </nav>
+
+<h5 style="text-align: right;">Sesi terakhir login: {{ last_login }}</h5>
+
+<h5 class= "center">Nama: <b>{{name}}</b> </h5> 
+
+<table class="styled-table center">
 
     <tr>
         <th>Nama</th>
@@ -15,31 +82,36 @@
     </tr>
     {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
     {% for transaction in list_of_transactions %}
-        <tr>
+        <tr class="active-row">
             <td>{{transaction.name}}</td>
             <td>{{transaction.type}}</td>
             <td>{{transaction.amount}}</td>
             <td>{{transaction.date}}</td>
             <td>{{transaction.description}}</td>
+            <td>
+
+            <a style = "margin-right: 10px" href="{% url 'money_tracker:modify_transaction' transaction.pk %}">
+                <button class="btn btn-primary" type="submit">Change</button>
+
+            <a href="{% url 'money_tracker:delete_transaction' transaction.pk %}">
+                <button class="btn btn-primary" type="submit">Delete</button>
+        </td>
+
         </tr>
+
     {% endfor %}
+
+
 
 </table>
 
-<h5>Sesi terakhir login: {{ last_login }}</h5>
 
 <br>
 
 <a href="{% url 'money_tracker:create_transaction' %}">
-    <button>
-        Transaksi Baru
-    </button>
-</a>
-
-<a href="{% url 'money_tracker:logout' %}">
-    <button>
-        Logout
-    </button>
+    <button class="btn btn-primary center" type="submit">Add New Transaction</button>
+    
 </a>
 
 {% endblock content %}
+

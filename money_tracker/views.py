@@ -59,10 +59,6 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
-def show_xml(request):
-    data = TransactionRecord.objects.all()
-    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
-
 def create_transaction(request):
     form = TransactionRecordForm(request.POST or None)
 
@@ -73,13 +69,41 @@ def create_transaction(request):
     context = {'form': form}
     return render(request, "create_transaction.html", context)
 
-def show_json(request):
+def modify_transaction(request, id):
+    # Get data berdasarkan ID
+    transaction = TransactionRecord.objects.get(pk = id)
+
+    # Set instance pada form dengan data dari transaction
+    form = TransactionRecordForm(request.POST or None, instance=transaction)
+
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman awal
+        form.save()
+        return HttpResponseRedirect(reverse('money_tracker:show_tracker'))
+
+    context = {'form': form}
+    return render(request, "modify_transaction.html", context)
+
+def delete_transaction(request, id):
+    # Get data berdasarkan ID
+    transaction = TransactionRecord.objects.get(pk = id)
+    # Hapus data
+    transaction.delete()
+    # Kembali ke halaman awal
+    return HttpResponseRedirect(reverse('money_tracker:show_tracker'))
+
+
+def show_xml(request):
     data = TransactionRecord.objects.all()
-    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_xml_by_id(request, id):
     data = TransactionRecord.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json(request):
+    data = TransactionRecord.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_json_by_id(request, id):
     data = TransactionRecord.objects.filter(pk=id)

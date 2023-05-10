@@ -6,40 +6,81 @@
 
 {% block content %}
 
-<div class = "login">
+<style>
+    * {
+        font-family: Arial;
+        text-align: center;
+        vertical-align: middle;
+    }
+    h1, h2 {
+        color: black;
+    }
+    th, td {
+        font-size: 120%;
+        padding: 12px 15px
+    }
+    table{
+        border-collapse: collapse;
+        margin: 30px auto;
+        font-size: 0.9em;
+        font-family: sans-serif;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        border-radius: 6px;
+    }
+    .padding {
+        padding-top: 30px;
+    }
+    .button {
+        border: none;
+        color: white;
+        font-weight: bold;
+        background-color: #0000FF;
+        text-decoration: none;
+        padding: 5px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 6px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 10px 15px 0 rgba(0,0,0,0.19);
+    }
 
-    <h1>Login</h1>
+</style>
+<div class="padding">
+    <div class = "login">
 
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
+        <h1 style="font-weight: bold;">Login</h1>
 
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Username: </td>
+                    <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+                </tr>
+                        
+                <tr>
+                    <td>Password: </td>
+                    <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+                </tr>
 
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
+                <tr>
+                    <td></td>
+                    <td><input class="button login_btn" type="submit" value="Login"></td>
+                </tr>
+            </table>
+        </form>
 
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+        {% if messages %}
+            <td>
+                {% for message in messages %}
+                    <td>{{ message }}</td>
+                {% endfor %}
+            </td>
+        {% endif %}     
+            
+        <br><br>
+        Don't have an account?  <a href="{% url 'money_tracker:register' %}">Register now!</a>
 
-    Belum mempunyai akun? <a href="{% url 'money_tracker:register' %}">Buat Akun</a>
-
+    </div>
 </div>
 
 {% endblock content %}
