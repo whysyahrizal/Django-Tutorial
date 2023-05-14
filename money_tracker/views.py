@@ -136,6 +136,24 @@ def show_json_by_id(request, id):
     data = TransactionRecord.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
+@csrf_exempt
+def create_transaction_flutter(request):
+    if request.method == 'POST':
+
+        data = json.loads(request.body)
+
+        new_transaction = TransactionRecord.objects.create(
+            name = data["name"],
+            type = data["type"],
+            amount = int(data["amount"]),
+            description = data["description"]
+        )
+
+        new_transaction.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
 
 
 
