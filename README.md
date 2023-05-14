@@ -5,4 +5,4 @@ NPM : 2106752142
 Kelas : PBP
 hobi : reading
 
-http://whysyahrizal.domcloud.io/
+django-tutorial-production-2892.up.railway.app
